@@ -1,0 +1,44 @@
+1. 3. We wish to know how have the genres ranked by Average Rating, for each profession and age group.
+ The age groups to be considered are: 18-35, 36-50 and 50+.
+ 
+1) MyDriver.class : Execution of job will start from the Driver class here we specify 
+all the mapper Reducer class.
+
+here we have two table 
+1. movies.dat : Movie information is in the file "movies.dat" and is in the following
+format:
+
+MovieID::Title::Genres
+
+2. ratings.dat : All ratings are contained in the file "ratings.dat" and are in the
+following format:
+
+UserID::MovieID::Rating::Timestamp
+
+3. users.dat : User information is in the file "users.dat" and is in the following
+format:
+
+UserID::Gender::Age::Occupation::Zip-code
+
+
+2) MovieMapper.class: First we will get movie_id as a key and genres as a value from movies.dat.
+
+3) Rating Mapper.class: Then we will get movie_id as a key and user_id and rating as a value from the ratings.dat.
+
+4) MovieRatingReducer.class: Here we join these two mapper and finally get user_id as a key and 
+concatenation of movie_id, genres and rating as a value.
+
+5) MovieRatingMapper.class: This is the mapper of the 2nd job. Here we take output of movieRatingMapper as a input and ouput of this mapper is 
+user_id as a key and concatenation of movie_id, genres and rating as a value.
+
+6) userMapper.class: This is the mapper of the 2nd job.Here we will get user_id as a key and age and occupation as a value.
+
+7)UserMovieRatingReducer.class : Here we join MovieRatingMapper and userMapper output with respect to user_id.
+Output of this reducer is concatenation of occupation,age and genres as a key and value is rating. 
+
+8) AvgRatingMapper.class :This is our 3rd job. It will take the output of the second job. Here we pass
+	Concatenation of occupation,age and genres as a key and rating as a value. we group the data on the basis of
+	key.
+	 
+9) AvgRatingReducer.class : Here we specify the custom logic for average rating. Finally we will get the
+genres ranked by Average Rating, for each profession and age group.

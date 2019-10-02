@@ -1,0 +1,26 @@
+#File Join
+Join the contents of 2 files:
+
+#First File (Contains Employee Name Data) (size 1TB)
+id,name
+101,Gaurav
+102,Rohit
+103,Karishma
+104,Darshan
+105,Divya
+
+#Second File (Contains Employee Department Data) (size 1TB)
+id,dept
+101,Sales
+102,Research
+103,NMG
+104,Admin
+105,HR
+
+==========================
+#Output
+id,name,dept
+101,Gaurav,Sales
+102,Rohit,Research
+103,Karishma,NMG
+...

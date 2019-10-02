@@ -1,0 +1,18 @@
+agent1.sources = tail
+agent1.channels = Channel-2
+agent1.sinks = HDFS
+
+agent1.sources.tail.type = exec
+agent1.sources.tail.command = cat /home/hadoop/data
+agent1.sources.tail.channels = Channel-2
+
+agent1.sinks.HDFS.channel = Channel-2
+agent1.sinks.HDFS.type = hdfs
+agent1.sinks.HDFS.hdfs.path = hdfs://localhost:9000/flume-00001
+agent1.sinks.HDFS.hdfs.fileType = DataStream
+
+agent1.channels.Channel-2.type = memory
+
+
+
+#bin/flume-ng agent --conf ./conf/ -f conf/flume.conf -n agent1 -Dflume.root.logger=DEBUG,console

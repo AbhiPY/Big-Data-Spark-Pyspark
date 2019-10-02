@@ -1,0 +1,26 @@
+1. Top ten most viewed movies with their movies Name (Ascending or Descending order)
+
+1) MyDriver.class : execution of job will start from the Driver class here we specify 
+all the mapper Reducer class.
+
+here we have two table 
+1. movies.dat : Movie information is in the file "movies.dat" and is in the following
+format:
+MovieID::Title::Genres
+
+2. ratings.dat : All ratings are contained in the file "ratings.dat" and are in the
+following format:
+
+UserID::MovieID::Rating::Timestamp
+
+2) MovieMapper.class: First we will get movie_id as a key and title as a value from movies.dat
+
+3) Rating Mapper.class: Then we will get movie_id as a key and count as a value from the ratings.dat
+
+4) MyReducer.class: Here we join these two mapper and finally get movie_name as a key and  number of views as a value
+
+5) SortingMapper.class :This is our 2nd job. it will take the output of the first job. here we pass number of views 
+	as a key and movie_name as a value. Because  we need to sort the output on the basis of number of views.
+	
+6) SortingReducer.class : Here we place the condition for top 10 value and finally we will get the top 10 most
+ viewed movie count and movie_name.

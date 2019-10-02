@@ -1,0 +1,32 @@
+#Sink agent configuration
+collector.sources = AvroIn
+collector.channels = memoryChannel-1
+collector.sinks = HadoopOut
+
+#source configuration
+
+collector.sources.AvroIn.type = avro
+collector.sources.AvroIn.bind = 192.168.75.146
+collector.sources.AvroIn.port = 10005
+collector.sources.AvroIn.channels = memoryChannel-1
+
+
+#Channel configuration
+
+collector.channels.memoryChannel-1.type = memory
+collector.channels.memoryChannel-1.capacity = 10000
+collector.channels.memoryChannel-1.transcationCapacity = 50
+
+
+#Sink configuration
+
+collector.sinks.HadoopOut.channel = memoryChannel-1
+collector.sinks.HadoopOut.type = hdfs
+collector.sinks.HadoopOut.hdfs.path =  hdfs://localhost:9000/apache_flume_data
+collector.sinks.HadoopOut.hdfs.fileType = DataStream
+collector.sinks.HadoopOut.hdfs.rollSize = 0
+collector.sinks.HadoopOut.hdfs.rollInterval = 60
+collector.sinks.HadoopOut.hdfs.rollCount = 0
+collector.sinks.HadoopOut.hdfs.batchSize = 50
+
+#bin/flume-ng agent --conf ./conf/ -f conf/flume.conf.sink -n collector

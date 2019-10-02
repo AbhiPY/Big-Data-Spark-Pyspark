@@ -1,0 +1,9 @@
+#Calculate avg dividend given by the companies
+
+divs = LOAD '/nyse-data' AS (exchange, symbol, date, dividends);
+
+grpd = GROUP divs BY symbol;
+
+avgdiv = FOREACH grpd GENERATE group, AVG(divs.dividends);
+
+STORE avgdiv INTO '/nyse-data-out';
